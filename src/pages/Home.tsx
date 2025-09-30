@@ -2,6 +2,36 @@ import { Header } from "@/components/Layout/Header";
 import { Footer } from "@/components/Layout/Footer";
 import { WordCounter } from "@/components/Tools/WordCounter";
 import { CaseConverter } from "@/components/Tools/CaseConverter";
+import { CharacterCounter } from "@/components/Tools/CharacterCounter";
+import { ReadingTime } from "@/components/Tools/ReadingTime";
+import { KeywordDensity } from "@/components/Tools/KeywordDensity";
+import { WordFrequency } from "@/components/Tools/WordFrequency";
+import { TextCleaner } from "@/components/Tools/TextCleaner";
+import { LineSorter } from "@/components/Tools/LineSorter";
+import { ReverseText } from "@/components/Tools/ReverseText";
+import { FindReplace } from "@/components/Tools/FindReplace";
+import { DuplicateRemover } from "@/components/Tools/DuplicateRemover";
+import { TextExtractor } from "@/components/Tools/TextExtractor";
+import { TextDiff } from "@/components/Tools/TextDiff";
+import { LoremGenerator } from "@/components/Tools/LoremGenerator";
+import { PasswordGenerator } from "@/components/Tools/PasswordGenerator";
+import { RandomText } from "@/components/Tools/RandomText";
+import { UsernameGenerator } from "@/components/Tools/UsernameGenerator";
+import { Base64Encoder } from "@/components/Tools/Base64Encoder";
+import { URLEncoder } from "@/components/Tools/URLEncoder";
+import { HTMLEncoder } from "@/components/Tools/HTMLEncoder";
+import { MorseCode } from "@/components/Tools/MorseCode";
+import { ReadabilityScore } from "@/components/Tools/ReadabilityScore";
+import { TextSummarizer } from "@/components/Tools/TextSummarizer";
+import { SentenceCounter } from "@/components/Tools/SentenceCounter";
+import { MetaGenerator } from "@/components/Tools/MetaGenerator";
+import { SlugGenerator } from "@/components/Tools/SlugGenerator";
+import { HashtagGenerator } from "@/components/Tools/HashtagGenerator";
+import { TitleAnalyzer } from "@/components/Tools/TitleAnalyzer";
+import { JSONFormatter } from "@/components/Tools/JSONFormatter";
+import { CSSMinifier } from "@/components/Tools/CSSMinifier";
+import { RegexTester } from "@/components/Tools/RegexTester";
+import { HashGenerator } from "@/components/Tools/HashGenerator";
 import { 
   Calculator, Type, Clock, Search, Hash, BarChart3, 
   Sparkles, ArrowDownUp, Repeat, SearchX, Filter, Link2, 
@@ -15,36 +45,36 @@ import { useLocation } from "react-router-dom";
 const tools = [
   { id: "word-counter", name: "Word Counter", icon: Calculator, component: WordCounter, category: "Text Analysis" },
   { id: "case-converter", name: "Case Converter", icon: Type, component: CaseConverter, category: "Text Formatting" },
-  { id: "character-counter", name: "Character Counter", icon: Type, category: "Text Analysis" },
-  { id: "reading-time", name: "Reading Time", icon: Clock, category: "Text Analysis" },
-  { id: "keyword-density", name: "Keyword Density", icon: Search, category: "Text Analysis" },
-  { id: "word-frequency", name: "Word Frequency", icon: BarChart3, category: "Writing Tools" },
-  { id: "text-cleaner", name: "Text Cleaner", icon: Sparkles, category: "Text Formatting" },
-  { id: "line-sorter", name: "Line Sorter", icon: ArrowDownUp, category: "Text Formatting" },
-  { id: "reverse-text", name: "Reverse Text", icon: Repeat, category: "Text Formatting" },
-  { id: "find-replace", name: "Find & Replace", icon: SearchX, category: "Text Manipulation" },
-  { id: "duplicate-remover", name: "Remove Duplicates", icon: Filter, category: "Text Manipulation" },
-  { id: "text-extractor", name: "Extract Emails/URLs", icon: Link2, category: "Text Manipulation" },
-  { id: "text-diff", name: "Text Compare", icon: GitCompare, category: "Text Manipulation" },
-  { id: "lorem-generator", name: "Lorem Ipsum", icon: FileText, category: "Generators" },
-  { id: "password-generator", name: "Password Generator", icon: Key, category: "Generators" },
-  { id: "random-text", name: "Random Text", icon: Shuffle, category: "Generators" },
-  { id: "username-generator", name: "Username Generator", icon: User, category: "Generators" },
-  { id: "base64-encoder", name: "Base64 Encoder", icon: Code, category: "Encoders & Decoders" },
-  { id: "url-encoder", name: "URL Encoder", icon: Link, category: "Encoders & Decoders" },
-  { id: "html-encoder", name: "HTML Encoder", icon: Code2, category: "Encoders & Decoders" },
-  { id: "morse-code", name: "Morse Code", icon: Radio, category: "Encoders & Decoders" },
-  { id: "readability-score", name: "Readability Score", icon: GraduationCap, category: "Writing Tools" },
-  { id: "text-summarizer", name: "Text Summarizer", icon: FileCode, category: "Writing Tools" },
-  { id: "sentence-counter", name: "Sentence Counter", icon: Calculator, category: "Text Analysis" },
-  { id: "meta-generator", name: "Meta Tag Generator", icon: Tag, category: "SEO Tools" },
-  { id: "slug-generator", name: "Slug Generator", icon: Link, category: "SEO Tools" },
-  { id: "hashtag-generator", name: "Hashtag Generator", icon: Hash, category: "SEO Tools" },
-  { id: "title-analyzer", name: "Title Analyzer", icon: Heading, category: "SEO Tools" },
-  { id: "json-formatter", name: "JSON Formatter", icon: Braces, category: "Developer Tools" },
-  { id: "css-minifier", name: "CSS Minifier", icon: Minimize, category: "Developer Tools" },
-  { id: "regex-tester", name: "Regex Tester", icon: Code, category: "Developer Tools" },
-  { id: "hash-generator", name: "Hash Generator", icon: ShieldCheck, category: "Developer Tools" },
+  { id: "character-counter", name: "Character Counter", icon: Type, component: CharacterCounter, category: "Text Analysis" },
+  { id: "reading-time", name: "Reading Time", icon: Clock, component: ReadingTime, category: "Text Analysis" },
+  { id: "keyword-density", name: "Keyword Density", icon: Search, component: KeywordDensity, category: "Text Analysis" },
+  { id: "word-frequency", name: "Word Frequency", icon: BarChart3, component: WordFrequency, category: "Writing Tools" },
+  { id: "text-cleaner", name: "Text Cleaner", icon: Sparkles, component: TextCleaner, category: "Text Formatting" },
+  { id: "line-sorter", name: "Line Sorter", icon: ArrowDownUp, component: LineSorter, category: "Text Formatting" },
+  { id: "reverse-text", name: "Reverse Text", icon: Repeat, component: ReverseText, category: "Text Formatting" },
+  { id: "find-replace", name: "Find & Replace", icon: SearchX, component: FindReplace, category: "Text Manipulation" },
+  { id: "duplicate-remover", name: "Remove Duplicates", icon: Filter, component: DuplicateRemover, category: "Text Manipulation" },
+  { id: "text-extractor", name: "Extract Emails/URLs", icon: Link2, component: TextExtractor, category: "Text Manipulation" },
+  { id: "text-diff", name: "Text Compare", icon: GitCompare, component: TextDiff, category: "Text Manipulation" },
+  { id: "lorem-generator", name: "Lorem Ipsum", icon: FileText, component: LoremGenerator, category: "Generators" },
+  { id: "password-generator", name: "Password Generator", icon: Key, component: PasswordGenerator, category: "Generators" },
+  { id: "random-text", name: "Random Text", icon: Shuffle, component: RandomText, category: "Generators" },
+  { id: "username-generator", name: "Username Generator", icon: User, component: UsernameGenerator, category: "Generators" },
+  { id: "base64-encoder", name: "Base64 Encoder", icon: Code, component: Base64Encoder, category: "Encoders & Decoders" },
+  { id: "url-encoder", name: "URL Encoder", icon: Link, component: URLEncoder, category: "Encoders & Decoders" },
+  { id: "html-encoder", name: "HTML Encoder", icon: Code2, component: HTMLEncoder, category: "Encoders & Decoders" },
+  { id: "morse-code", name: "Morse Code", icon: Radio, component: MorseCode, category: "Encoders & Decoders" },
+  { id: "readability-score", name: "Readability Score", icon: GraduationCap, component: ReadabilityScore, category: "Writing Tools" },
+  { id: "text-summarizer", name: "Text Summarizer", icon: FileCode, component: TextSummarizer, category: "Writing Tools" },
+  { id: "sentence-counter", name: "Sentence Counter", icon: Calculator, component: SentenceCounter, category: "Text Analysis" },
+  { id: "meta-generator", name: "Meta Tag Generator", icon: Tag, component: MetaGenerator, category: "SEO Tools" },
+  { id: "slug-generator", name: "Slug Generator", icon: Link, component: SlugGenerator, category: "SEO Tools" },
+  { id: "hashtag-generator", name: "Hashtag Generator", icon: Hash, component: HashtagGenerator, category: "SEO Tools" },
+  { id: "title-analyzer", name: "Title Analyzer", icon: Heading, component: TitleAnalyzer, category: "SEO Tools" },
+  { id: "json-formatter", name: "JSON Formatter", icon: Braces, component: JSONFormatter, category: "Developer Tools" },
+  { id: "css-minifier", name: "CSS Minifier", icon: Minimize, component: CSSMinifier, category: "Developer Tools" },
+  { id: "regex-tester", name: "Regex Tester", icon: Code, component: RegexTester, category: "Developer Tools" },
+  { id: "hash-generator", name: "Hash Generator", icon: ShieldCheck, component: HashGenerator, category: "Developer Tools" },
 ];
 
 const categories = Array.from(new Set(tools.map(t => t.category)));
