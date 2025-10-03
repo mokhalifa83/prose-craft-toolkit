@@ -14,54 +14,63 @@ import {
 
 const toolCategories = {
   "Text Analysis": [
-    { name: "Word Counter", path: "/" },
-    { name: "Character Counter", path: "/" },
-    { name: "Reading Time", path: "/" },
-    { name: "Keyword Density", path: "/" },
-    { name: "Word Frequency", path: "/" },
-    { name: "Sentence Counter", path: "/" },
+    { name: "Word Counter", id: "word-counter" },
+    { name: "Character Counter", id: "character-counter" },
+    { name: "Reading Time", id: "reading-time" },
+    { name: "Keyword Density", id: "keyword-density" },
+    { name: "Word Frequency", id: "word-frequency" },
+    { name: "Sentence Counter", id: "sentence-counter" },
   ],
   "Text Formatting": [
-    { name: "Case Converter", path: "/" },
-    { name: "Text Cleaner", path: "/" },
-    { name: "Line Sorter", path: "/" },
-    { name: "Reverse Text", path: "/" },
-    { name: "Find & Replace", path: "/" },
-    { name: "Duplicate Remover", path: "/" },
+    { name: "Case Converter", id: "case-converter" },
+    { name: "Text Cleaner", id: "text-cleaner" },
+    { name: "Line Sorter", id: "line-sorter" },
+    { name: "Reverse Text", id: "reverse-text" },
+    { name: "Find & Replace", id: "find-replace" },
+    { name: "Duplicate Remover", id: "duplicate-remover" },
   ],
   "Generators": [
-    { name: "Lorem Ipsum", path: "/" },
-    { name: "Password Generator", path: "/" },
-    { name: "Random Text", path: "/" },
-    { name: "Username Generator", path: "/" },
-    { name: "Hashtag Generator", path: "/" },
+    { name: "Lorem Ipsum", id: "lorem-generator" },
+    { name: "Password Generator", id: "password-generator" },
+    { name: "Random Text", id: "random-text" },
+    { name: "Username Generator", id: "username-generator" },
+    { name: "Hashtag Generator", id: "hashtag-generator" },
   ],
   "Encoders & Decoders": [
-    { name: "Base64 Encoder", path: "/" },
-    { name: "URL Encoder", path: "/" },
-    { name: "HTML Encoder", path: "/" },
-    { name: "Morse Code", path: "/" },
-    { name: "Hash Generator", path: "/" },
+    { name: "Base64 Encoder", id: "base64-encoder" },
+    { name: "URL Encoder", id: "url-encoder" },
+    { name: "HTML Encoder", id: "html-encoder" },
+    { name: "Morse Code", id: "morse-code" },
+    { name: "Hash Generator", id: "hash-generator" },
   ],
   "SEO Tools": [
-    { name: "Meta Generator", path: "/" },
-    { name: "Slug Generator", path: "/" },
-    { name: "Readability Score", path: "/" },
-    { name: "Title Analyzer", path: "/" },
+    { name: "Meta Generator", id: "meta-generator" },
+    { name: "Slug Generator", id: "slug-generator" },
+    { name: "Readability Score", id: "readability-score" },
+    { name: "Title Analyzer", id: "title-analyzer" },
   ],
   "Developer Tools": [
-    { name: "JSON Formatter", path: "/" },
-    { name: "CSS Minifier", path: "/" },
-    { name: "Regex Tester", path: "/" },
-    { name: "Text Extractor", path: "/" },
-    { name: "Text Diff", path: "/" },
-    { name: "Text Summarizer", path: "/" },
+    { name: "JSON Formatter", id: "json-formatter" },
+    { name: "CSS Minifier", id: "css-minifier" },
+    { name: "Regex Tester", id: "regex-tester" },
+    { name: "Text Extractor", id: "text-extractor" },
+    { name: "Text Diff", id: "text-diff" },
+    { name: "Text Summarizer", id: "text-summarizer" },
   ],
 };
 
 export const Header = () => {
   const { theme, setTheme } = useTheme();
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+
+  const handleToolClick = (toolId: string) => {
+    // Navigate to home if not already there
+    if (window.location.pathname !== '/') {
+      window.location.href = '/?tool=' + toolId;
+    } else {
+      // Dispatch custom event to open tool
+      window.dispatchEvent(new CustomEvent('openTool', { detail: { toolId } }));
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 glass-card border-b border-border">
@@ -84,15 +93,15 @@ export const Header = () => {
                   <NavigationMenuContent>
                     <div className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {tools.map((tool) => (
-                        <Link
+                        <button
                           key={tool.name}
-                          to={tool.path}
-                          className="block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          onClick={() => handleToolClick(tool.id)}
+                          className="block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-left w-full"
                         >
                           <div className="text-sm font-medium leading-none">
                             {tool.name}
                           </div>
-                        </Link>
+                        </button>
                       ))}
                     </div>
                   </NavigationMenuContent>

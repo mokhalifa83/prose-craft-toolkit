@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   FileText, 
   Type, 
@@ -73,6 +73,30 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
+  // Listen for tool opening events from header
+  useEffect(() => {
+    const handleOpenTool = (event: CustomEvent) => {
+      setSelectedTool(event.detail.toolId);
+      // Scroll to tools section
+      setTimeout(() => {
+        document.getElementById('tools-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    };
+
+    window.addEventListener('openTool' as any, handleOpenTool);
+    
+    // Check URL for tool parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const toolParam = urlParams.get('tool');
+    if (toolParam) {
+      setSelectedTool(toolParam);
+    }
+
+    return () => {
+      window.removeEventListener('openTool' as any, handleOpenTool);
+    };
+  }, []);
+
   const tools = [
     { id: "word-counter", name: "Word Counter", icon: FileText, category: "Text Analysis", description: "Count words, characters, and sentences", component: WordCounter },
     { id: "case-converter", name: "Case Converter", icon: Type, category: "Text Formatting", description: "Convert text case (upper, lower, title)", component: CaseConverter },
@@ -128,7 +152,7 @@ const Index = () => {
           <div className="text-center space-y-6 max-w-4xl mx-auto animate-fade-in-up">
             <div className="inline-block">
               <span className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20">
-                🚀 30+ Professional Tools
+                🚀 32+ Professional Tools
               </span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
@@ -140,7 +164,11 @@ const Index = () => {
               privacy-focused, and completely free. No sign-up required.
             </p>
             <div className="flex flex-wrap gap-4 justify-center pt-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-xl">
+              <Button 
+                size="lg" 
+                onClick={() => document.getElementById('tools-section')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-xl"
+              >
                 Explore Tools
               </Button>
               <Button size="lg" variant="outline" className="px-8 py-6 text-lg rounded-xl border-2">
@@ -165,12 +193,63 @@ const Index = () => {
         </div>
       </section>
 
+      {/* How It Works Section */}
+      <section className="py-16 px-4 bg-card/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">How It Works</h2>
+            <p className="text-muted-foreground text-lg">
+              Get started in three simple steps
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary text-2xl font-bold">
+                1
+              </div>
+              <h3 className="text-xl font-semibold">Choose Your Tool</h3>
+              <p className="text-muted-foreground">
+                Browse our collection of 32+ text tools organized by category. Find exactly what you need with our search function.
+              </p>
+            </div>
+            
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary text-2xl font-bold">
+                2
+              </div>
+              <h3 className="text-xl font-semibold">Input Your Text</h3>
+              <p className="text-muted-foreground">
+                Paste or type your text directly into the tool. All processing happens instantly in your browser.
+              </p>
+            </div>
+            
+            <div className="text-center space-y-4">
+              <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary text-2xl font-bold">
+                3
+              </div>
+              <h3 className="text-xl font-semibold">Get Results</h3>
+              <p className="text-muted-foreground">
+                Copy, download, or share your results. No sign-up required, no data stored on our servers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Tools Section */}
-      <section className="py-16 px-4">
+      <section id="tools-section" className="py-16 px-4">
         <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">Explore All Tools</h2>
+            <p className="text-muted-foreground text-lg">
+              Click on any tool to get started instantly
+            </p>
+          </div>
+          
           <div className="mb-12 space-y-6">
             <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-              <div className="relative flex-1 max-w-md">
+              <div className="relative flex-1 max-w-md mx-auto md:mx-0">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
                 <Input
                   placeholder="Search tools..."
@@ -181,7 +260,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
               {categories.map((category) => (
                 <Button
                   key={category}
@@ -223,13 +302,29 @@ const Index = () => {
           </div>
 
           {selectedTool && ToolComponent && (
-            <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-              <div className="glass-card rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div 
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              onClick={() => setSelectedTool(null)}
+            >
+              <div 
+                className="glass-card rounded-2xl p-6 max-w-5xl w-full max-h-[90vh] overflow-y-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-bold gradient-text">
-                    {tools.find(t => t.id === selectedTool)?.name}
-                  </h2>
-                  <Button variant="ghost" onClick={() => setSelectedTool(null)}>
+                  <div>
+                    <h2 className="text-2xl font-bold gradient-text">
+                      {tools.find(t => t.id === selectedTool)?.name}
+                    </h2>
+                    <p className="text-muted-foreground text-sm mt-1">
+                      {tools.find(t => t.id === selectedTool)?.description}
+                    </p>
+                  </div>
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    onClick={() => setSelectedTool(null)}
+                    className="rounded-xl hover:bg-destructive/10 hover:text-destructive"
+                  >
                     ✕
                   </Button>
                 </div>
@@ -241,48 +336,121 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-4 bg-card/50">
-        <div className="container mx-auto">
+      <section className="py-16 px-4 bg-card/30">
+        <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Why Choose TextToolbox?</h2>
             <p className="text-muted-foreground text-lg">
-              Built for professionals, loved by everyone
+              Professional-grade tools trusted by thousands of users
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="glass-card p-8 text-center space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                <Lock className="w-8 h-8 text-primary" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="glass-card p-6 space-y-3">
+              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Lock className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">Privacy First</h3>
-              <p className="text-muted-foreground">
-                All processing happens locally in your browser. Your data never leaves your device.
+              <h3 className="text-lg font-semibold">100% Private</h3>
+              <p className="text-sm text-muted-foreground">
+                All processing happens in your browser. Your data never leaves your device.
               </p>
             </div>
             
-            <div className="glass-card p-8 text-center space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                <Sparkles className="w-8 h-8 text-primary" />
+            <div className="glass-card p-6 space-y-3">
+              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Sparkles className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">Lightning Fast</h3>
-              <p className="text-muted-foreground">
-                Instant results powered by optimized algorithms. No waiting, no loading screens.
+              <h3 className="text-lg font-semibold">Lightning Fast</h3>
+              <p className="text-sm text-muted-foreground">
+                Instant results with optimized algorithms. No waiting or loading screens.
               </p>
             </div>
             
-            <div className="glass-card p-8 text-center space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                <Target className="w-8 h-8 text-primary" />
+            <div className="glass-card p-6 space-y-3">
+              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Target className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">No Sign-Up</h3>
-              <p className="text-muted-foreground">
-                Jump straight into using any tool. No accounts, no email verification, no hassle.
+              <h3 className="text-lg font-semibold">No Sign-Up</h3>
+              <p className="text-sm text-muted-foreground">
+                Start using tools immediately. No accounts or email verification needed.
+              </p>
+            </div>
+            
+            <div className="glass-card p-6 space-y-3">
+              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Globe className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold">Always Free</h3>
+              <p className="text-sm text-muted-foreground">
+                All tools are 100% free forever. No hidden costs or premium tiers.
               </p>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Use Cases Section */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">Perfect For Everyone</h2>
+            <p className="text-muted-foreground text-lg">
+              Trusted by professionals across various industries
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="glass-card p-8 space-y-4 hover-lift">
+              <div className="text-4xl">✍️</div>
+              <h3 className="text-xl font-semibold">Writers & Authors</h3>
+              <p className="text-muted-foreground">
+                Track word counts, analyze readability, and optimize your content for better engagement.
+              </p>
+            </div>
+            
+            <div className="glass-card p-8 space-y-4 hover-lift">
+              <div className="text-4xl">🎓</div>
+              <h3 className="text-xl font-semibold">Students</h3>
+              <p className="text-muted-foreground">
+                Meet essay requirements, check character limits, and improve your writing quality.
+              </p>
+            </div>
+            
+            <div className="glass-card p-8 space-y-4 hover-lift">
+              <div className="text-4xl">💼</div>
+              <h3 className="text-xl font-semibold">Content Creators</h3>
+              <p className="text-muted-foreground">
+                Optimize content length, generate meta tags, and create SEO-friendly slugs.
+              </p>
+            </div>
+            
+            <div className="glass-card p-8 space-y-4 hover-lift">
+              <div className="text-4xl">👨‍💻</div>
+              <h3 className="text-xl font-semibold">Developers</h3>
+              <p className="text-muted-foreground">
+                Format JSON, minify CSS, test regex patterns, and encode/decode text.
+              </p>
+            </div>
+            
+            <div className="glass-card p-8 space-y-4 hover-lift">
+              <div className="text-4xl">📱</div>
+              <h3 className="text-xl font-semibold">Social Media Managers</h3>
+              <p className="text-muted-foreground">
+                Generate hashtags, check character limits, and create engaging captions.
+              </p>
+            </div>
+            
+            <div className="glass-card p-8 space-y-4 hover-lift">
+              <div className="text-4xl">🎯</div>
+              <h3 className="text-xl font-semibold">SEO Professionals</h3>
+              <p className="text-muted-foreground">
+                Analyze keyword density, generate meta descriptions, and optimize titles.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };
