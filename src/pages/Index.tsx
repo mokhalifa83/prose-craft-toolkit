@@ -303,32 +303,44 @@ const Index = () => {
 
           {selectedTool && ToolComponent && (
             <div 
-              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fade-in"
               onClick={() => setSelectedTool(null)}
             >
               <div 
-                className="glass-card rounded-2xl p-6 max-w-5xl w-full max-h-[90vh] overflow-y-auto"
+                className="glass-card rounded-3xl p-8 max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border-primary/30 animate-scale-in"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="flex justify-between items-center mb-6">
-                  <div>
-                    <h2 className="text-2xl font-bold gradient-text">
-                      {tools.find(t => t.id === selectedTool)?.name}
-                    </h2>
-                    <p className="text-muted-foreground text-sm mt-1">
-                      {tools.find(t => t.id === selectedTool)?.description}
-                    </p>
+                <div className="flex justify-between items-start mb-8 pb-6 border-b border-primary/20">
+                  <div className="flex items-center gap-4">
+                    {tools.find(t => t.id === selectedTool)?.icon && (
+                      <div className="p-4 rounded-2xl bg-primary/10">
+                        {(() => {
+                          const ToolIcon = tools.find(t => t.id === selectedTool)?.icon;
+                          return ToolIcon ? <ToolIcon className="w-8 h-8 text-primary" /> : null;
+                        })()}
+                      </div>
+                    )}
+                    <div>
+                      <h2 className="text-3xl font-bold gradient-text">
+                        {tools.find(t => t.id === selectedTool)?.name}
+                      </h2>
+                      <p className="text-muted-foreground mt-2">
+                        {tools.find(t => t.id === selectedTool)?.description}
+                      </p>
+                    </div>
                   </div>
                   <Button 
                     variant="ghost" 
                     size="icon"
                     onClick={() => setSelectedTool(null)}
-                    className="rounded-xl hover:bg-destructive/10 hover:text-destructive"
+                    className="rounded-full hover:bg-primary/10 hover:text-primary transition-all w-12 h-12"
                   >
-                    ✕
+                    <span className="text-2xl">✕</span>
                   </Button>
                 </div>
-                <ToolComponent />
+                <div className="rounded-2xl bg-background/30 p-6">
+                  <ToolComponent />
+                </div>
               </div>
             </div>
           )}
