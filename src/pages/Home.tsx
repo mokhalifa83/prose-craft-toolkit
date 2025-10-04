@@ -39,7 +39,8 @@ import {
   Link, Radio, GraduationCap, FileCode, Tag, Heading, 
   Braces, Minimize, ShieldCheck, Code2
 } from "lucide-react";
-import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const tools = [
@@ -81,7 +82,23 @@ const categories = Array.from(new Set(tools.map(t => t.category)));
 
 const Home = () => {
   const location = useLocation();
+  const [selectedTool, setSelectedTool] = useState<string | null>(null);
 
+  // Open via header dropdown or URL ?tool=
+  useEffect(() => {
+    const handleOpenTool = (event: CustomEvent) => {
+      setSelectedTool(event.detail.toolId as string);
+    };
+    window.addEventListener('openTool' as any, handleOpenTool);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const toolParam = urlParams.get('tool');
+    if (toolParam) setSelectedTool(toolParam);
+
+    return () => window.removeEventListener('openTool' as any, handleOpenTool);
+  }, []);
+
+  // Preserve existing hash scroll behavior for other anchors
   useEffect(() => {
     if (location.hash) {
       const element = document.querySelector(location.hash);
@@ -127,14 +144,15 @@ const Home = () => {
                     {categoryTools.map((tool) => {
                       const ToolIcon = tool.icon;
                       return (
-                        <a
+                        <button
                           key={tool.id}
-                          href={`#${tool.id}`}
-                          className="flex items-center gap-2 p-2 rounded-lg hover:bg-primary/10 transition-colors text-sm"
+                          type="button"
+                          onClick={() => setSelectedTool(tool.id)}
+                          className="flex items-center gap-2 p-2 rounded-lg hover:bg-primary/10 transition-colors text-sm w-full text-left"
                         >
                           <ToolIcon className="w-4 h-4 text-primary" />
                           {tool.name}
-                        </a>
+                        </button>
                       );
                     })}
                   </div>
@@ -144,21 +162,41 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Tool Interfaces */}
-        <section className="space-y-16">
-          {tools.filter(t => t.component).map((tool) => {
-            const ToolComponent = tool.component;
-            return (
-              <div key={tool.id} className="glass-effect border border-border rounded-2xl p-6 md:p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <tool.icon className="w-8 h-8 text-primary" />
-                  <h2 className="text-3xl font-bold">{tool.name}</h2>
+        {/* Modal: render only when a tool is selected */}
+        {selectedTool && (() => {
+          const current = tools.find(t => t.id === selectedTool);
+          if (!current) return null;
+          const ToolComponent = current.component;
+          return (
+            <div 
+              className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4 animate-fade-in"
+              onClick={() => setSelectedTool(null)}
+            >
+              <div 
+                className="glass-card rounded-3xl p-8 max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border-primary/30 animate-scale-in"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex justify-between items-start mb-6 pb-4 border-b border-primary/20">
+                  <div className="flex items-center gap-3">
+                    <current.icon className="w-7 h-7 text-primary" />
+                    <h2 className="text-2xl font-bold gradient-text">{current.name}</h2>
+                  </div>
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    onClick={() => setSelectedTool(null)}
+                    className="rounded-full hover:bg-primary/10 hover:text-primary"
+                  >
+                    <span className="text-2xl">✕</span>
+                  </Button>
                 </div>
-                <ToolComponent />
+                <div className="rounded-2xl bg-background/30 p-4 md:p-6">
+                  <ToolComponent />
+                </div>
               </div>
-            );
-          })}
-        </section>
+            </div>
+          );
+        })()}
 
         {/* About Section */}
         <section className="mt-20 mb-16 bg-secondary/50 rounded-2xl p-8 md:p-12">
