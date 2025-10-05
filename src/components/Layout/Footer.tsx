@@ -71,16 +71,12 @@ export const Footer = () => {
                 {links.map((link) => (
                   <li key={link.href}>
                     {link.href.startsWith("/#") ? (
-                      <button
-                        onClick={() => {
-                          const toolId = link.href.replace("/#", "");
-                          window.dispatchEvent(new CustomEvent('openTool', { detail: { toolId } }));
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors text-left"
+                      <Link
+                        to={`/?tool=${link.href.replace("/#", "")}`}
+                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
                         {link.name}
-                      </button>
+                      </Link>
                     ) : (
                       <Link
                         to={link.href}
