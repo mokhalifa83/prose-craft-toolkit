@@ -90,7 +90,7 @@ const Home = () => {
   const location = useLocation();
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
 
-  // Open via header dropdown or URL ?tool=
+  // Open via header dropdown or URL ?tool= (on mount)
   useEffect(() => {
     const handleOpenTool = (event: CustomEvent) => {
       setSelectedTool(event.detail.toolId as string);
@@ -103,6 +103,13 @@ const Home = () => {
 
     return () => window.removeEventListener('openTool' as any, handleOpenTool);
   }, []);
+
+  // React to URL ?tool= changes while staying on Home
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tool = params.get('tool');
+    setSelectedTool(tool);
+  }, [location.search]);
 
   // Preserve existing hash scroll behavior for other anchors
   useEffect(() => {
