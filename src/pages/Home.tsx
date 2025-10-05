@@ -42,6 +42,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const tools = [
   { id: "word-counter", name: "Word Counter", icon: Calculator, component: WordCounter, category: "Text Analysis" },
@@ -232,6 +238,247 @@ const Home = () => {
             <p>
               The tools work even when you're offline. Once the page loads, you can disconnect from the internet and continue using every feature. This makes TextToolbox perfect for working on sensitive documents, using in locations with poor internet connectivity, or simply when you want complete control over your data. Your browser does all the work, we just provide the tools.
             </p>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="mt-20 mb-16">
+          <div className="glass-card rounded-3xl p-8 md:p-12">
+            <h2 className="text-3xl font-bold mb-8 text-center gradient-text">
+              Frequently Asked Questions
+            </h2>
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {/* General Questions */}
+              <AccordionItem value="what-is-texttoolbox" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  What is TextToolbox and how does it work?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  TextToolbox is a free online platform offering 32+ professional text manipulation and analysis tools. All tools run directly in your browser using JavaScript, meaning your text never leaves your device. No installation, no registration, no data collection - just instant, secure text processing for writers, developers, SEO specialists, and content creators.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="is-free" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  Is TextToolbox really free to use?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Yes, absolutely! All 32+ tools on TextToolbox are completely free with no hidden costs, premium tiers, or paywalls. You can use any tool unlimited times without creating an account. We believe essential text tools should be accessible to everyone - students, professionals, and businesses alike.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="account-required" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  Do I need to create an account to use TextToolbox?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  No account needed! All tools work instantly without registration. Simply visit TextToolbox, choose your tool, paste your text, and get results immediately. This design ensures maximum privacy and the fastest possible workflow for all users.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="data-privacy" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  Is my text data safe and private?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Your privacy is our priority. All text processing happens locally in your browser - your data never touches our servers. We don't store, transmit, or analyze your text. You can even use TextToolbox offline once the page loads. Perfect for handling sensitive documents, confidential content, or personal information.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="offline-use" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  Can I use TextToolbox offline?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Yes! Once TextToolbox loads in your browser, most tools work offline since all processing is client-side. This makes it perfect for working on planes, in areas with poor connectivity, or when handling sensitive data you don't want transmitted online.
+                </AccordionContent>
+              </AccordionItem>
+
+              {/* Tool-Specific Questions */}
+              <AccordionItem value="word-counter-accuracy" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  How accurate is the word counter tool?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Our word counter uses industry-standard algorithms that match Microsoft Word and Google Docs counting methods. It accurately counts words separated by spaces, handles hyphenated words correctly, and provides separate counts for characters with/without spaces. Ideal for meeting essay requirements, social media limits, and content writing goals.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="character-limits" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  What are the character limits for social media platforms?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Common social media character limits: Twitter/X (280 characters), Facebook posts (63,206 but optimal ~40-80), Instagram captions (2,200), LinkedIn posts (3,000), and meta descriptions (155-160). Use our Character Counter tool to ensure your content fits platform requirements and maximizes engagement.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="reading-time-calculation" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  How is reading time calculated?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Our Reading Time Calculator uses the average adult reading speed of 200-250 words per minute. This industry-standard metric helps bloggers, content marketers, and publishers display accurate read times, improving user experience and engagement. The tool accounts for text complexity and can be customized for different audiences.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="keyword-density" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  What is a good keyword density for SEO?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  SEO experts recommend a keyword density of 1-2% for optimal search engine rankings. Our Keyword Density Checker helps you avoid keyword stuffing (which Google penalizes) while ensuring your target keywords appear enough for relevance. Use it to optimize blog posts, product descriptions, and landing pages for better Google rankings.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="readability-score" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  How are readability scores calculated?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Our Readability Score tool uses proven formulas like Flesch-Kincaid Grade Level and Flesch Reading Ease. These analyze sentence length, word complexity, and syllable count to determine reading difficulty. Aim for 60-70 (Plain English) for general audiences, 50-60 for technical content. Higher scores mean easier reading - crucial for accessibility and SEO.
+                </AccordionContent>
+              </AccordionItem>
+
+              {/* SEO & Professional Questions */}
+              <AccordionItem value="seo-benefits" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  How can TextToolbox improve my SEO rankings?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  TextToolbox offers specialized SEO tools including Keyword Density Checker (optimize keyword usage), Meta Tag Generator (create perfect title/description tags), Slug Generator (create SEO-friendly URLs), Readability Score (improve content quality), and Title Analyzer (optimize headlines). Together, these help you create content that ranks higher on Google, Bing, and other search engines.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="meta-tags" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  Why are meta tags important for SEO?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Meta tags (title and description) are crucial for SEO as they appear in Google search results and affect click-through rates. Our Meta Tag Generator helps you create optimized tags with proper length (titles under 60 characters, descriptions under 160) and keyword placement. Well-crafted meta tags can dramatically improve your search visibility and organic traffic.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="password-security" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  Are generated passwords truly secure and random?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Yes! Our Password Generator uses cryptographically secure random number generation (CSPRNG) to create truly random passwords. You can customize length (8-128 characters) and include uppercase, lowercase, numbers, and symbols. Generated passwords are never stored or transmitted - they exist only in your browser. Perfect for creating strong, unique passwords for all your accounts.
+                </AccordionContent>
+              </AccordionItem>
+
+              {/* Technical Questions */}
+              <AccordionItem value="browsers-supported" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  Which browsers support TextToolbox?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  TextToolbox works on all modern browsers: Chrome, Firefox, Safari, Edge, Opera, and Brave. We also support mobile browsers on iOS and Android. The tools are optimized for performance and work seamlessly on desktop, tablet, and smartphone devices. No plugins or extensions required - just open and use!
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="mobile-friendly" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  Is TextToolbox mobile-friendly?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Absolutely! TextToolbox features a fully responsive design optimized for smartphones and tablets. All 32+ tools work perfectly on mobile devices with touch-friendly interfaces. Whether you're on iPhone, Android, or tablet, you get the same powerful features and instant results. Perfect for on-the-go content creation and text editing.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="json-formatter" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  What can I do with the JSON Formatter tool?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Our JSON Formatter validates, formats, and beautifies JSON data with syntax highlighting. Perfect for developers debugging APIs, working with configuration files, or analyzing API responses. It detects errors, properly indents nested objects/arrays, and makes complex JSON structures readable. Essential for web developers, API testing, and data analysis.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="regex-tester" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  How does the Regex Tester help developers?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  The Regex Tester lets developers test regular expressions in real-time with instant match highlighting and capture group display. Perfect for validating email addresses, phone numbers, URLs, or creating custom text patterns. Supports all JavaScript regex features including flags (g, i, m) and provides helpful error messages for debugging complex patterns.
+                </AccordionContent>
+              </AccordionItem>
+
+              {/* Content Creation Questions */}
+              <AccordionItem value="lorem-ipsum" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  When should I use the Lorem Ipsum Generator?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Lorem Ipsum is the industry-standard placeholder text for designers and developers. Use our generator when creating website mockups, designing layouts, testing typography, or developing content templates. Generate any amount of paragraphs, words, or sentences instantly. Essential for web designers, UI/UX professionals, and content managers.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="case-converter" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  What text case formats does the Case Converter support?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Our Case Converter supports all major formats: UPPERCASE, lowercase, Title Case, Sentence case, aLtErNaTiNg cAsE, and camelCase. Perfect for formatting headings, fixing ALL CAPS text, preparing code variables, or creating consistent document formatting. Save time and ensure professional-looking content across all your writing projects.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="text-summarizer" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  How does the Text Summarizer work?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Our Text Summarizer uses advanced algorithms to identify key sentences and important information in your text, creating concise summaries while preserving core meaning. Ideal for summarizing articles, research papers, long emails, or reports. Perfect for students, researchers, journalists, and busy professionals who need to extract main points quickly.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="duplicate-remover" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  What does the Remove Duplicates tool do?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  The Duplicate Remover instantly finds and eliminates duplicate lines from any text. Perfect for cleaning up email lists, removing duplicate URLs, organizing data sets, or preparing unique content. It preserves the original order and offers case-sensitive/insensitive options. Essential for data cleaning, list management, and content organization.
+                </AccordionContent>
+              </AccordionItem>
+
+              {/* Business & Professional Use */}
+              <AccordionItem value="business-use" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  Can I use TextToolbox for commercial projects?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Yes! TextToolbox is completely free for personal and commercial use. Use our tools for client work, business content, marketing campaigns, product descriptions, technical documentation, or any professional project. No attribution required, no licensing fees, unlimited usage. Perfect for agencies, freelancers, and enterprise teams.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="team-use" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  Can my team use TextToolbox?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Absolutely! TextToolbox is perfect for teams of any size. Share the link with colleagues, bookmark specific tools for quick access, or integrate it into your workflow. Since everything runs in the browser, there's no installation or IT setup required. Ideal for content teams, development departments, marketing agencies, and educational institutions.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="api-available" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  Do you offer an API for TextToolbox tools?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  Currently, TextToolbox is a web-based platform optimized for browser use. While we don't offer a public API yet, all tools are built with modern JavaScript and run efficiently in any browser. For automated workflows, consider using browser automation tools or contact us to discuss custom integration solutions for enterprise needs.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="updates-frequency" className="border-border bg-card/50 rounded-lg px-6">
+                <AccordionTrigger className="text-lg font-semibold hover:text-primary">
+                  How often is TextToolbox updated?
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  We continuously improve TextToolbox with new features, tool additions, and performance enhancements. Updates are deployed automatically - you always use the latest version without any downloads or installations. Follow our blog or social media for announcements about new tools, features, and improvements based on user feedback.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </section>
       </main>
