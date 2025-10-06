@@ -1,10 +1,18 @@
 import { Header } from "@/components/Layout/Header";
 import { Footer } from "@/components/Layout/Footer";
+import { SEO } from "@/components/SEO";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
-      <Header />
+    <>
+      <SEO 
+        title="About TextToolbox - Our Mission & Values | Free Privacy-Focused Text Tools"
+        description="Learn about TextToolbox's mission to provide free, privacy-focused text manipulation tools. Created by Mohamed Khalifa. No tracking, no ads, always free."
+        canonical="/about"
+        keywords="about texttoolbox, mohamed khalifa, privacy text tools, free online tools"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+        <Header />
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         <div className="glass-effect border border-border rounded-2xl p-8 md:p-12">
           <h1 className="text-4xl font-bold mb-8">About TextToolbox</h1>
@@ -32,6 +40,7 @@ const About = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

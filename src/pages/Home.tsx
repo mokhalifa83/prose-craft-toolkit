@@ -1,5 +1,6 @@
 import { Header } from "@/components/Layout/Header";
 import { Footer } from "@/components/Layout/Footer";
+import { SEO } from "@/components/SEO";
 import { WordCounter } from "@/components/Tools/WordCounter";
 import { CaseConverter } from "@/components/Tools/CaseConverter";
 import { CharacterCounter } from "@/components/Tools/CharacterCounter";
@@ -90,6 +91,53 @@ const Home = () => {
   const location = useLocation();
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is TextToolbox and how does it work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "TextToolbox is a free online platform offering 32+ professional text manipulation and analysis tools. All tools run directly in your browser using JavaScript, meaning your text never leaves your device. No installation, no registration, no data collection - just instant, secure text processing for writers, developers, SEO specialists, and content creators."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is TextToolbox really free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, absolutely! All 32+ tools on TextToolbox are completely free with no hidden costs, premium tiers, or paywalls. You can use any tool unlimited times without creating an account."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my text data safe and private?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your privacy is our priority. All text processing happens locally in your browser - your data never touches our servers. We don't store, transmit, or analyze your text. You can even use TextToolbox offline once the page loads."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How accurate is the word counter tool?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our word counter uses industry-standard algorithms that match Microsoft Word and Google Docs counting methods. It accurately counts words separated by spaces, handles hyphenated words correctly, and provides separate counts for characters with/without spaces."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a good keyword density for SEO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SEO experts recommend a keyword density of 1-2% for optimal search engine rankings. Our Keyword Density Checker helps you avoid keyword stuffing (which Google penalizes) while ensuring your target keywords appear enough for relevance."
+        }
+      }
+    ]
+  };
+
   // Open via header dropdown or URL ?tool= (on mount)
   useEffect(() => {
     const handleOpenTool = (event: CustomEvent) => {
@@ -124,8 +172,16 @@ const Home = () => {
   }, [location]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
-      <Header />
+    <>
+      <SEO 
+        title="TextToolbox - 32+ Free Online Text Tools | Word Counter, Case Converter & More"
+        description="Free online text tools including word counter, character counter, case converter, and 30+ other text manipulation tools. Privacy-focused, fast, no registration required. Perfect for writers, developers, and content creators."
+        canonical="/"
+        keywords="text tools, word counter, character counter, case converter, text manipulation, online tools, free text tools, SEO tools, writing tools, developer tools"
+        schema={faqSchema}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+        <Header />
       
       <main className="container mx-auto px-4 py-8">
         {/* Hero Section */}
@@ -492,6 +548,7 @@ const Home = () => {
       
       <Footer />
     </div>
+    </>
   );
 };
 

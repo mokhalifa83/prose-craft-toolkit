@@ -6,13 +6,21 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { SEO } from "@/components/SEO";
 
 const Contact = () => {
   const [state, handleSubmit] = useForm("xrbyldpz");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
-      <Header />
+    <>
+      <SEO 
+        title="Contact Us - TextToolbox | Get in Touch"
+        description="Contact TextToolbox for questions, feedback, or support. Reach out to Mohamed Khalifa via our contact form, email, or Facebook."
+        canonical="/contact"
+        keywords="contact texttoolbox, text tools support, feedback, contact mohamed khalifa"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+        <Header />
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         <div className="glass-effect border border-border rounded-2xl p-8 md:p-12">
           <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
@@ -159,6 +167,7 @@ const Contact = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

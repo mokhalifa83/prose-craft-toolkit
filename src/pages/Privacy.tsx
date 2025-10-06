@@ -1,10 +1,18 @@
 import { Header } from "@/components/Layout/Header";
 import { Footer } from "@/components/Layout/Footer";
+import { SEO } from "@/components/SEO";
 
 const Privacy = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
-      <Header />
+    <>
+      <SEO 
+        title="Privacy Policy - TextToolbox | Your Data Stays Private"
+        description="TextToolbox Privacy Policy: All tools run in your browser. We don't collect, store, or track your data. Complete privacy guaranteed."
+        canonical="/privacy"
+        keywords="privacy policy, texttoolbox privacy, no data collection, browser-based tools"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+        <Header />
       
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         <div className="glass-effect border border-border rounded-2xl p-8 md:p-12">
@@ -134,6 +142,7 @@ const Privacy = () => {
       
       <Footer />
     </div>
+    </>
   );
 };
 

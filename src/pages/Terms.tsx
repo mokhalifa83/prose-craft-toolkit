@@ -1,10 +1,18 @@
 import { Header } from "@/components/Layout/Header";
 import { Footer } from "@/components/Layout/Footer";
+import { SEO } from "@/components/SEO";
 
 const Terms = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
-      <Header />
+    <>
+      <SEO 
+        title="Terms of Service - TextToolbox | Usage Terms & Conditions"
+        description="TextToolbox Terms of Service: Free text tools provided as-is. No registration required. Client-side processing ensures your privacy."
+        canonical="/terms"
+        keywords="terms of service, texttoolbox terms, usage policy, legal terms"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+        <Header />
       
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         <div className="glass-effect border border-border rounded-2xl p-8 md:p-12">
@@ -144,6 +152,7 @@ const Terms = () => {
       
       <Footer />
     </div>
+    </>
   );
 };
 
