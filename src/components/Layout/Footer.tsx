@@ -59,51 +59,91 @@ const footerLinks = {
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-border bg-card mt-20">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8">
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="font-semibold text-sm mb-4 text-foreground">
-                {category}
-              </h3>
-              <ul className="space-y-2">
-                {links.map((link) => (
-                  <li key={link.href}>
-                    {link.href.startsWith("/#") ? (
-                      <Link
-                        to={`/?tool=${link.href.replace("/#", "")}`}
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {link.name}
-                      </Link>
-                    ) : (
-                      <Link
-                        to={link.href}
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {link.name}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
+    <footer className="border-t border-border/50 bg-gradient-to-b from-background to-card mt-24">
+      <div className="container mx-auto px-4 py-16">
+        {/* Main Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          {/* Brand Section */}
+          <div className="lg:col-span-1">
+            <h2 className="text-2xl font-bold text-foreground mb-3">TextToolbox</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+              Your comprehensive suite of free text manipulation and analysis tools for writers, developers, and SEO professionals.
+            </p>
+            <div className="flex gap-3">
+              <a
+                href="https://www.facebook.com/moekhalifa8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-border/50 hover:border-primary/50 hover:bg-primary/10 transition-all"
+                aria-label="Facebook"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
             </div>
-          ))}
+          </div>
+
+          {/* Tool Categories - Organized into 3 columns */}
+          <div className="lg:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-8">
+            {Object.entries(footerLinks).slice(0, -1).map(([category, links]) => (
+              <div key={category}>
+                <h3 className="font-semibold text-sm uppercase tracking-wider mb-4 text-foreground/90">
+                  {category}
+                </h3>
+                <ul className="space-y-2.5">
+                  {links.map((link) => (
+                    <li key={link.href}>
+                      {link.href.startsWith("/#") ? (
+                        <Link
+                          to={`/?tool=${link.href.replace("/#", "")}`}
+                          className="text-sm text-muted-foreground hover:text-primary transition-colors inline-block"
+                        >
+                          {link.name}
+                        </Link>
+                      ) : (
+                        <Link
+                          to={link.href}
+                          className="text-sm text-muted-foreground hover:text-primary transition-colors inline-block"
+                        >
+                          {link.name}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Company Links */}
+        <div className="border-t border-border/50 pt-8 pb-8">
+          <div className="flex flex-wrap justify-center gap-6 mb-8">
+            {footerLinks.Company.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
         </div>
         
-        <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>
-            Crafted by{" "}
+        {/* Bottom Copyright */}
+        <div className="border-t border-border/50 pt-8 text-center">
+          <p className="text-sm text-muted-foreground">
+            © 2025 TextToolbox. All rights reserved. Crafted by{" "}
             <a
               href="https://www.facebook.com/moekhalifa8"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:underline font-medium"
+              className="text-primary hover:text-primary/80 font-medium transition-colors"
             >
               Mohamed Khalifa
             </a>
-            {" "} | © 2025 TextToolbox. All rights reserved.
           </p>
         </div>
       </div>
