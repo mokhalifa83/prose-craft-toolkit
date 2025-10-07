@@ -136,29 +136,6 @@ const Contact = () => {
               </Button>
             </form>
           )}
-          
-          <div className="not-prose grid md:grid-cols-2 gap-6 mt-12 pt-8 border-t border-border">
-            <a
-              href="https://www.facebook.com/moekhalifa8"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 p-6 bg-primary/10 border border-primary/20 rounded-xl hover:bg-primary/20 transition-colors"
-            >
-              <Facebook className="w-8 h-8 text-primary" />
-              <div>
-                <div className="font-semibold text-lg">Facebook</div>
-                <div className="text-sm text-muted-foreground">Connect with Mohamed Khalifa</div>
-              </div>
-            </a>
-            
-            <div className="flex items-center gap-4 p-6 bg-card border border-border rounded-xl">
-              <Mail className="w-8 h-8 text-primary" />
-              <div>
-                <div className="font-semibold text-lg">Email</div>
-                <div className="text-sm text-muted-foreground">contact@texttoolbox.com</div>
-              </div>
-            </div>
-          </div>
 
           <p className="text-muted-foreground mt-8 text-sm">
             <strong>Response Time:</strong> We typically respond within 24-48 hours. For urgent issues or bug reports, please include as much detail as possible.
