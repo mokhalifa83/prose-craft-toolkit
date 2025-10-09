@@ -33,6 +33,18 @@ All colors MUST be HSL.
     --success: 142 76% 36%;
     --warning: 38 92% 50%;
     
+    /* Category Colors */
+    --category-blue: 217 91% 60%;
+    --category-green: 142 76% 45%;
+    --category-purple: 262 83% 58%;
+    --category-orange: 27 96% 61%;
+    --category-cyan: 189 94% 43%;
+    --category-pink: 330 81% 60%;
+    --category-yellow: 48 96% 53%;
+    --category-indigo: 243 75% 59%;
+    --category-teal: 173 80% 40%;
+    --category-red: 0 84% 60%;
+    
     --border: 280 20% 85%;
     --input: 280 20% 85%;
     --ring: 320 65% 52%;
@@ -65,6 +77,18 @@ All colors MUST be HSL.
     
     --success: 142 76% 36%;
     --warning: 38 92% 50%;
+    
+    /* Category Colors (Dark Mode) */
+    --category-blue: 217 91% 60%;
+    --category-green: 142 76% 45%;
+    --category-purple: 262 83% 58%;
+    --category-orange: 27 96% 61%;
+    --category-cyan: 189 94% 43%;
+    --category-pink: 330 81% 60%;
+    --category-yellow: 48 96% 53%;
+    --category-indigo: 243 75% 59%;
+    --category-teal: 173 80% 40%;
+    --category-red: 0 84% 60%;
     
     --border: 280 30% 22%;
     --input: 280 30% 22%;

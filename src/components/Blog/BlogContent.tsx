@@ -30,17 +30,17 @@ export const BlogContent = ({ content }: BlogContentProps) => {
         </p>
       ),
       [BLOCKS.UL_LIST]: (_node: any, children: any) => (
-        <ul className="list-disc list-inside space-y-2 mb-6 text-muted-foreground ml-4">
+        <ul className="list-disc list-outside space-y-2 mb-6 text-muted-foreground ml-6 pl-2">
           {children}
         </ul>
       ),
       [BLOCKS.OL_LIST]: (_node: any, children: any) => (
-        <ol className="list-decimal list-inside space-y-2 mb-6 text-muted-foreground ml-4">
+        <ol className="list-decimal list-outside space-y-2 mb-6 text-muted-foreground ml-6 pl-2">
           {children}
         </ol>
       ),
       [BLOCKS.LIST_ITEM]: (_node: any, children: any) => (
-        <li className="leading-relaxed">{children}</li>
+        <li className="leading-relaxed pl-2">{children}</li>
       ),
       [BLOCKS.QUOTE]: (_node: any, children: any) => (
         <blockquote className="border-l-4 border-primary pl-6 py-2 my-6 italic text-muted-foreground bg-card/50 rounded-r-lg">

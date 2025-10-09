@@ -8,14 +8,32 @@ interface CategoryBadgeProps {
 
 const getCategoryColor = (category: string): string => {
   const colors: Record<string, string> = {
-    'Text Manipulation': 'bg-blue-500/10 text-blue-500 border-blue-500/20',
-    'SEO': 'bg-green-500/10 text-green-500 border-green-500/20',
-    'Tools': 'bg-purple-500/10 text-purple-500 border-purple-500/20',
-    'Productivity': 'bg-orange-500/10 text-orange-500 border-orange-500/20',
-    'Tutorial': 'bg-cyan-500/10 text-cyan-500 border-cyan-500/20',
+    'Text Manipulation': 'bg-[hsl(var(--category-blue)/0.1)] text-[hsl(var(--category-blue))] border-[hsl(var(--category-blue)/0.2)]',
+    'SEO': 'bg-[hsl(var(--category-green)/0.1)] text-[hsl(var(--category-green))] border-[hsl(var(--category-green)/0.2)]',
+    'Tools': 'bg-[hsl(var(--category-purple)/0.1)] text-[hsl(var(--category-purple))] border-[hsl(var(--category-purple)/0.2)]',
+    'Productivity': 'bg-[hsl(var(--category-orange)/0.1)] text-[hsl(var(--category-orange))] border-[hsl(var(--category-orange)/0.2)]',
+    'Tutorial': 'bg-[hsl(var(--category-cyan)/0.1)] text-[hsl(var(--category-cyan))] border-[hsl(var(--category-cyan)/0.2)]',
+    'Writing': 'bg-[hsl(var(--category-pink)/0.1)] text-[hsl(var(--category-pink))] border-[hsl(var(--category-pink)/0.2)]',
+    'Tips': 'bg-[hsl(var(--category-yellow)/0.1)] text-[hsl(var(--category-yellow))] border-[hsl(var(--category-yellow)/0.2)]',
+    'Development': 'bg-[hsl(var(--category-indigo)/0.1)] text-[hsl(var(--category-indigo))] border-[hsl(var(--category-indigo)/0.2)]',
+    'Design': 'bg-[hsl(var(--category-teal)/0.1)] text-[hsl(var(--category-teal))] border-[hsl(var(--category-teal)/0.2)]',
+    'Marketing': 'bg-[hsl(var(--category-red)/0.1)] text-[hsl(var(--category-red))] border-[hsl(var(--category-red)/0.2)]',
   };
   
-  return colors[category] || 'bg-primary/10 text-primary border-primary/20';
+  // Generate a consistent color for unknown categories based on hash
+  if (!colors[category]) {
+    const colorOptions = [
+      'bg-[hsl(var(--category-blue)/0.1)] text-[hsl(var(--category-blue))] border-[hsl(var(--category-blue)/0.2)]',
+      'bg-[hsl(var(--category-purple)/0.1)] text-[hsl(var(--category-purple))] border-[hsl(var(--category-purple)/0.2)]',
+      'bg-[hsl(var(--category-pink)/0.1)] text-[hsl(var(--category-pink))] border-[hsl(var(--category-pink)/0.2)]',
+      'bg-[hsl(var(--category-indigo)/0.1)] text-[hsl(var(--category-indigo))] border-[hsl(var(--category-indigo)/0.2)]',
+      'bg-[hsl(var(--category-teal)/0.1)] text-[hsl(var(--category-teal))] border-[hsl(var(--category-teal)/0.2)]',
+    ];
+    const hash = category.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return colorOptions[hash % colorOptions.length];
+  }
+  
+  return colors[category];
 };
 
 export const CategoryBadge = ({ category, className }: CategoryBadgeProps) => {
