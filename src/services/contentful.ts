@@ -34,7 +34,7 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   try {
     const response = await client.getEntries({
       content_type: 'blogPost',
-      order: ['-fields.publishedDate'],
+      order: ['-sys.createdAt'], // Use system created date instead
     });
 
     return response.items.map(transformBlogPost);
@@ -74,7 +74,7 @@ export const getBlogPostsByCategory = async (
     const response = await client.getEntries({
       content_type: 'blogPost',
       'fields.category': category,
-      order: ['-fields.publishedDate'],
+      order: ['-sys.createdAt'], // Use system created date instead
     });
 
     return response.items.map(transformBlogPost);
