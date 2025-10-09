@@ -110,6 +110,15 @@ export const Header = () => {
               
               <NavigationMenuItem>
                 <Link
+                  to="/blog"
+                  className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                >
+                  Blog
+                </Link>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <Link
                   to="/about"
                   className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-primary/10 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                 >

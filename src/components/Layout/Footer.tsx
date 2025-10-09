@@ -50,6 +50,7 @@ const footerLinks = {
     { name: "Text Summarizer", href: "/#text-summarizer" },
   ],
   "Company": [
+    { name: "Blog", href: "/blog" },
     { name: "About Us", href: "/about" },
     { name: "Contact", href: "/contact" },
     { name: "Privacy Policy", href: "/privacy" },
