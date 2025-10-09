@@ -9,7 +9,7 @@ export interface BlogPostSkeleton extends EntrySkeletonType {
     excerpt: string;
     content: Document;
     category: string;
-    publishedDate: string;
+    publishedDat: string;
     featuredImage?: ContentfulAsset;
   };
 }

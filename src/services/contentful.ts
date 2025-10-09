@@ -18,7 +18,7 @@ const transformBlogPost = (entry: any): BlogPost => {
     excerpt: fields.excerpt || '',
     content: fields.content,
     category: fields.category || '',
-    publishedDate: fields.publishedDate || '',
+    publishedDate: fields.publishedDat || entry.sys.createdAt,
     featuredImage: fields.featuredImage
       ? {
           url: fields.featuredImage.fields?.file?.url || '',
@@ -34,7 +34,7 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   try {
     const response = await client.getEntries({
       content_type: 'blogPost',
-      order: ['-sys.createdAt'], // Use system created date instead
+      order: ['-fields.publishedDat'],
     });
 
     return response.items.map(transformBlogPost);
@@ -74,7 +74,7 @@ export const getBlogPostsByCategory = async (
     const response = await client.getEntries({
       content_type: 'blogPost',
       'fields.category': category,
-      order: ['-sys.createdAt'], // Use system created date instead
+      order: ['-fields.publishedDat'],
     });
 
     return response.items.map(transformBlogPost);
