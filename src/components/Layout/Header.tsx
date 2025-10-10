@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Moon, Sun, Wrench, ChevronDown } from "lucide-react";
+import { Moon, Sun, Wrench, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { Link } from "react-router-dom";
@@ -11,6 +11,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const toolCategories = {
   "Text Analysis": [
@@ -61,8 +63,10 @@ const toolCategories = {
 
 export const Header = () => {
   const { theme, setTheme } = useTheme();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleToolClick = (toolId: string) => {
+    setMobileMenuOpen(false);
     // Navigate to home if not already there
     if (window.location.pathname !== '/') {
       window.location.href = '/?tool=' + toolId;
@@ -150,6 +154,65 @@ export const Header = () => {
                 <Moon className="h-5 w-5" />
               )}
             </Button>
+            
+            {/* Mobile Menu */}
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild className="md:hidden">
+                <Button variant="ghost" size="icon" className="rounded-xl">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] overflow-y-auto">
+                <nav className="flex flex-col gap-4 mt-8">
+                  <Accordion type="single" collapsible className="w-full">
+                    {Object.entries(toolCategories).map(([category, tools]) => (
+                      <AccordionItem key={category} value={category}>
+                        <AccordionTrigger className="text-sm font-medium">
+                          {category}
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="flex flex-col gap-2 pl-4">
+                            {tools.map((tool) => (
+                              <button
+                                key={tool.name}
+                                onClick={() => handleToolClick(tool.id)}
+                                className="text-left text-sm py-2 px-3 rounded-md hover:bg-accent transition-colors"
+                              >
+                                {tool.name}
+                              </button>
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                  
+                  <div className="flex flex-col gap-2 pt-4 border-t">
+                    <Link
+                      to="/blog"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-sm py-2 px-3 rounded-md hover:bg-accent transition-colors"
+                    >
+                      Blog
+                    </Link>
+                    <Link
+                      to="/about"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-sm py-2 px-3 rounded-md hover:bg-accent transition-colors"
+                    >
+                      About
+                    </Link>
+                    <Link
+                      to="/contact"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-sm py-2 px-3 rounded-md hover:bg-accent transition-colors"
+                    >
+                      Contact
+                    </Link>
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
